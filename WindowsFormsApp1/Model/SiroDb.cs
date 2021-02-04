@@ -10,5 +10,6 @@ namespace WindowsFormsApp1.Model
 {
     public class SiroDb: DbContext
     {
+        public DbSet<TiposEntrada> TiposEntradas { get; set; }
     }
 }
