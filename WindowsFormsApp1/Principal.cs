@@ -17,5 +17,11 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void Principal_Load(object sender, EventArgs e)
+        {
+            var frm = new Login();
+            frm.ShowDialog();
+        }
     }
 }
