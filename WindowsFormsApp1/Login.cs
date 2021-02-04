@@ -17,5 +17,10 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void textEdit2_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
