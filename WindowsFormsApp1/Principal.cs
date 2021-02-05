@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Principal : DevExpress.XtraEditors.XtraForm
     {
+        public static Model.Global Global = new Model.Global();
         public Principal()
         {
             InitializeComponent();
