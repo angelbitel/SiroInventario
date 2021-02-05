@@ -61,5 +61,6 @@ namespace WindowsFormsApp1.Model
         public DateTime Hasta { get; set; }
         public bool HabilitarDescuentoJuvilado { get; set; }
         public bool HabilitarSincronizacion { get; internal set; }
+        public string Conexion { get; set; }
     }
 }

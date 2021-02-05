@@ -103,6 +103,7 @@ namespace WindowsFormsApp1
                 Principal.Global.NombreCompleto = res.NombreUsuario;
                 Principal.Global.IdPerfil = res.IdPerfil ?? 0;
                 Entrar = true;
+                Principal.This.CambiarImagen();
                 Close();
             }
             else

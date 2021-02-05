@@ -8,5 +8,6 @@ namespace WindowsFormsApp1.Model
         public int IdTipoEntrada { get; set; }
         public string TipoEntrada { get; set; }
         public int Operacion { get; set; }
+        public bool EsInventario{ get; set; }
     }
 }
