@@ -11,7 +11,6 @@ namespace WindowsFormsApp1.Model
 {
     public class SiroDb: DbContext
     {
-
         public SiroDb() : base($"name={Principal.Global.Conexion}") { }
         protected override void OnModelCreating(DbModelBuilder dbModelBuilder)
         {
@@ -24,5 +23,6 @@ namespace WindowsFormsApp1.Model
         public DbSet<Empresas> Empresas { get; set; }
         public DbSet<Productos> Productos { get; set; }
         public DbSet<Impuestos> Impuestos { get; set; }
+        public DbSet<DetallesEntrada> DetallesEntrada { get; set; }
     }
 }

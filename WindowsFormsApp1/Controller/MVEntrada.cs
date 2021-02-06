@@ -54,7 +54,7 @@ namespace WindowsFormsApp1.Controller
                 var lst = new List<Model.ProductosCortos>();
                 try
                 {
-                    lst= context.Database.SqlQuery<Model.ProductosCortos>("Select IdProducto, IdImpuesto, Producto, Codigo, CodigoBarra, Costo, Precio1, NoITBMS from Productos WHERE ISNULL(Deshabilitar,1) = 1").ToList();
+                    lst= context.Database.SqlQuery<Model.ProductosCortos>("Select IdProducto, IdImpuesto, Producto, Codigo, CodigoBarra, Costo, Precio1, NoITBMS from Productos WHERE ISNULL(Deshabilitar,0) = 0").ToList();
                 }
                 catch (Exception ex)
                 {

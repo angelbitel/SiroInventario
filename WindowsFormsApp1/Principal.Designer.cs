@@ -43,6 +43,7 @@
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.lbl = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItemTotales = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -65,6 +66,8 @@
             this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCantidad = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProducto = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIdDetalleEntrada = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemHyperLinkEditEliminar = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.textBoxBuscarProducto = new System.Windows.Forms.TextBox();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -74,6 +77,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
@@ -85,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entradaProductoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEditEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
@@ -151,9 +156,11 @@
             this.barEditItem3,
             this.barEditItem4,
             this.lbl,
-            this.barButtonItem3});
+            this.barButtonItem3,
+            this.barStaticItemTotales,
+            this.barButtonItem4});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 11;
+            this.barManager1.MaxItemId = 13;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemImageComboBoxMovimientos,
             this.repositoryItemComboBoxEmpresa,
@@ -224,7 +231,9 @@
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.lbl),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem3, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem3, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItemTotales),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem4, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
@@ -243,6 +252,13 @@
             this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
             this.barButtonItem3.Name = "barButtonItem3";
             this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            // 
+            // barStaticItemTotales
+            // 
+            this.barStaticItemTotales.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barStaticItemTotales.Caption = "0.00";
+            this.barStaticItemTotales.Id = 11;
+            this.barStaticItemTotales.Name = "barStaticItemTotales";
             // 
             // barDockControlTop
             // 
@@ -336,6 +352,8 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.MenuManager = this.barManager1;
             this.gridControl1.Name = "gridControl1";
+            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemHyperLinkEditEliminar});
             this.gridControl1.Size = new System.Drawing.Size(2100, 582);
             this.gridControl1.TabIndex = 6;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -354,11 +372,14 @@
             this.colCosto,
             this.colTotal,
             this.colCantidad,
-            this.colProducto});
+            this.colProducto,
+            this.colIdDetalleEntrada});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView1_CellValueChanged);
+            this.gridView1.RowCountChanged += new System.EventHandler(this.gridView1_RowCountChanged);
             // 
             // colIdProducto
             // 
@@ -369,9 +390,11 @@
             // 
             this.colCodigoBarra.FieldName = "CodigoBarra";
             this.colCodigoBarra.Name = "colCodigoBarra";
+            this.colCodigoBarra.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "CodigoBarra", "CANTIDAD RENGLONES :{0}")});
             this.colCodigoBarra.Visible = true;
             this.colCodigoBarra.VisibleIndex = 0;
-            this.colCodigoBarra.Width = 401;
+            this.colCodigoBarra.Width = 386;
             // 
             // colMonto
             // 
@@ -385,17 +408,21 @@
             this.colCosto.Name = "colCosto";
             this.colCosto.Visible = true;
             this.colCosto.VisibleIndex = 3;
-            this.colCosto.Width = 238;
+            this.colCosto.Width = 241;
             // 
             // colTotal
             // 
+            this.colTotal.DisplayFormat.FormatString = "{0:#.##}";
+            this.colTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotal.FieldName = "Total";
+            this.colTotal.GroupFormat.FormatString = "{0:#.##}";
+            this.colTotal.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotal.Name = "colTotal";
             this.colTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:#.##}")});
             this.colTotal.Visible = true;
             this.colTotal.VisibleIndex = 4;
-            this.colTotal.Width = 355;
+            this.colTotal.Width = 262;
             // 
             // colCantidad
             // 
@@ -405,7 +432,7 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Cantidad", "{0:#.##}")});
             this.colCantidad.Visible = true;
             this.colCantidad.VisibleIndex = 2;
-            this.colCantidad.Width = 302;
+            this.colCantidad.Width = 307;
             // 
             // colProducto
             // 
@@ -413,7 +440,25 @@
             this.colProducto.Name = "colProducto";
             this.colProducto.Visible = true;
             this.colProducto.VisibleIndex = 1;
-            this.colProducto.Width = 765;
+            this.colProducto.Width = 686;
+            // 
+            // colIdDetalleEntrada
+            // 
+            this.colIdDetalleEntrada.Caption = "ELIMINAR";
+            this.colIdDetalleEntrada.ColumnEdit = this.repositoryItemHyperLinkEditEliminar;
+            this.colIdDetalleEntrada.FieldName = "IdDetalleEntrada";
+            this.colIdDetalleEntrada.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("colIdDetalleEntrada.ImageOptions.Image")));
+            this.colIdDetalleEntrada.Name = "colIdDetalleEntrada";
+            this.colIdDetalleEntrada.Visible = true;
+            this.colIdDetalleEntrada.VisibleIndex = 5;
+            this.colIdDetalleEntrada.Width = 179;
+            // 
+            // repositoryItemHyperLinkEditEliminar
+            // 
+            this.repositoryItemHyperLinkEditEliminar.AutoHeight = false;
+            this.repositoryItemHyperLinkEditEliminar.Caption = "ELIMNAR";
+            this.repositoryItemHyperLinkEditEliminar.Name = "repositoryItemHyperLinkEditEliminar";
+            this.repositoryItemHyperLinkEditEliminar.Click += new System.EventHandler(this.repositoryItemHyperLinkEditEliminar_Click);
             // 
             // textBoxBuscarProducto
             // 
@@ -503,6 +548,14 @@
             // 
             this.defaultLookAndFeel1.LookAndFeel.SkinName = "VS2010";
             // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "CANCELAR";
+            this.barButtonItem4.Id = 12;
+            this.barButtonItem4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 33F);
@@ -516,7 +569,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.SkinName = "Office 2013";
             this.Name = "Principal";
-            this.Text = "Principal";
+            this.Text = "PRINCIPAL";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Principal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -530,6 +583,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entradaProductoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEditEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
@@ -588,5 +642,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colProducto;
         private System.Windows.Forms.TextBox textBoxCantidad;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraBars.BarStaticItem barStaticItemTotales;
+        private DevExpress.XtraGrid.Columns.GridColumn colIdDetalleEntrada;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEditEliminar;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
     }
 }

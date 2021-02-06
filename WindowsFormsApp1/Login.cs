@@ -28,9 +28,9 @@ namespace WindowsFormsApp1
 
         private async void Login_Load(object sender, EventArgs e)
         {
+            Cerrar = true;
             BuscarInforImagen(Settings.Default.UltimoUsuario);
-
-
+            
             textEditUsuario.Enabled = false;
             if (Contrasena != null)
             {
@@ -86,7 +86,7 @@ namespace WindowsFormsApp1
             }
             barStaticItem1.Caption = new string(pwd);
         }
-
+        internal bool Cerrar { get; set; }
         private void EjecutarBusqueda()
         {
             var res = new Model.Login();
@@ -104,6 +104,7 @@ namespace WindowsFormsApp1
                 Principal.Global.IdPerfil = res.IdPerfil ?? 0;
                 Entrar = true;
                 Principal.This.CambiarImagen();
+                Cerrar = false;
                 Close();
             }
             else

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WindowsFormsApp1.Model
 {
     public class Entradas
     {
-
+        public Entradas()
+        {
+            this.DetallesEntrada = new HashSet<DetallesEntrada>();
+        }
         [Key]
         public int IdEntrada { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
@@ -26,5 +30,6 @@ namespace WindowsFormsApp1.Model
         public virtual TiposEntrada TiposEntrada { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         public virtual Proveedores Proveedores { get; set; }
+        public virtual ICollection<DetallesEntrada> DetallesEntrada { get; set; }
     }
 }

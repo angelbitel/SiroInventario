@@ -8,6 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DevExpress.DataAccess.ConnectionParameters;
+using DevExpress.DataAccess.Sql;
+using WindowsFormsApp1.Model;
 
 namespace WindowsFormsApp1.Controller
 {
@@ -54,5 +57,25 @@ namespace WindowsFormsApp1.Controller
         internal static ImageComboBoxItem Item(string desc, string value) => new ImageComboBoxItem { Description = desc, Value = value };
         internal static ImageComboBoxItem Item(string desc, int value) => new ImageComboBoxItem { Description = desc, Value = value };
         internal static ImageComboBoxItem Item(int value, string desc) => new ImageComboBoxItem { Description = desc, Value = value };
+        internal static SqlDataSource BindToData(string queryComand)
+        {
+            //BUSCAR LA CADENA DE CONEXXION DEL CONTENEDOR DE DATOS SELLECCIONADO StoredProcQuery 
+            var cnnContext = new SiroDb();
+            var cnn = cnnContext.Database.Connection.ConnectionString.Split(';');
+            //// Create a data source with the required connection parameters.
+            MsSqlConnectionParameters connectionParameters = new MsSqlConnectionParameters(cnn[0].Split('=')[1], cnn[1].Split('=')[1], cnn[3].Split('=')[1], cnn[4].Split('=')[1], MsSqlAuthorizationType.SqlServer);
+            SqlDataSource ds = new SqlDataSource(connectionParameters);
+            CustomSqlQuery query = new CustomSqlQuery();
+
+            query.Name = @"customQuery";
+            query.Sql = queryComand;
+            // Add the query to the collection. 
+            ds.Queries.Add(query);
+            // Make the data source structure displayed  
+            // in the Field List of an End-User Report Designer. 
+            ds.RebuildResultSchema();
+
+            return ds;
+        }
     }
 }
